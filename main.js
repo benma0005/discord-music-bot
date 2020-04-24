@@ -3,19 +3,22 @@ const { Client, MessageEmbed } = require('discord.js');
 const client = new Discord.Client();
 const ytdl = require('ytdl-core')
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyAt8wdg-YuArRHtKWK05In0VYmQwQMamaM');
+const youtube = new YouTube('YT Token');
 const prefix = '.'
+
+let plmusic;
 
 client.on('message', async message => {
     let splitMessage = message.content.split(' ');
+    const searchString = splitMessage.slice(1).join(' ');
 
     if (splitMessage[0] === prefix+'play') {
 
         if (message.member.voice.channel) {
 
-            if (splitMessage.length === 2) {
+            if (splitMessage.length > 1) {
                 const connection = await message.member.voice.channel.join();
-                youtube.searchVideos(splitMessage[1], 8)
+                youtube.searchVideos(searchString, 8)
                     .then(results => {
                         const embed = new MessageEmbed()
                         .setTitle('Zuur auswahl stehend')
@@ -24,211 +27,29 @@ client.on('message', async message => {
                         message.channel.send(embed)
                         message.channel.awaitMessages(msg => {
                             if (msg.content === "1") {
-                                const plmusic = connection.play(ytdl(`${results[0].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[0].url}`, { filter: 'audioonly' }))
                             }
                             if (msg.content === "2") {
-                                const plmusic = connection.play(ytdl(`${results[1].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[1].url}`, { filter: 'audioonly' }))
                             }
                             if (msg.content === "3") {
-                                const plmusic = connection.play(ytdl(`${results[2].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[2].url}`, { filter: 'audioonly' }))
                             }
                             if (msg.content === "4") {
-                                const plmusic = connection.play(ytdl(`${results[3].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[3].url}`, { filter: 'audioonly' })) 
                             }
                             if (msg.content === "5") {
-                                const plmusic = connection.play(ytdl(`${results[4].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[4].url}`, { filter: 'audioonly' }))
                             }
                             if (msg.content === "6") {
-
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });                            }
+                                plmusic = connection.play(ytdl(`${results[5].url}`, { filter: 'audioonly' }))
+                            }
                             if (msg.content === "7") {
-                                const plmusic = connection.play(ytdl(`${results[5].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[6].url}`, { filter: 'audioonly' }))
                             }
                             if (msg.content === "8") {
-                                const plmusic = connection.play(ytdl(`${results[7].url}`, { filter: 'audioonly' }))
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'pause') {
-                                      plmusic.pause();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Pausiert')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wurde pausiert')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
-            
-                                client.on('message', msg => {
-                                    if (msg.content === prefix+'resume') {
-                                      plmusic.resume();
-                                      const embed = new MessageEmbed()
-                                      .setTitle('Fortgesetzt')
-                                      .setColor(0x03fc67)
-                                      .setDescription('Das Lied wird fortgesetzt')
-                                      message.channel.send(embed)
-                                    }
-                                    
-                                });
+                                plmusic = connection.play(ytdl(`${results[7].url}`, { filter: 'audioonly' }))
+                                
                             }
 
                             
@@ -251,16 +72,42 @@ client.on('message', async message => {
             }
 
         }
+
+        else {
+            const embed = new MessageEmbed()
+            .setTitle('Fehler')
+            .setColor(0x03fc67)
+            .setDescription('Du musst dich in einem Sprach Kanal befinden')
+            message.channel.send(embed)
+        }
+
     }
 
-    else {
-        const embed = new MessageEmbed()
-        .setTitle('Fehler')
-        .setColor(0x03fc67)
-        .setDescription('Du musst dich in einem Sprach Kanal befinden')
-        message.channel.send(embed)
-    }
 
 });
 
-client.login('Njk3NTM2ODEyNTg2ODkzMzYz.XqM2pg.XhJ939j3_3z0-aGDyAJvZzD2Vy0');
+client.on('message', msg => {
+    if (msg.content === prefix+'pause') {
+      plmusic.pause();
+      const embed = new MessageEmbed()
+      .setTitle('Pausiert')
+      .setColor(0x03fc67)
+      .setDescription('Das Lied wurde pausiert')
+      msg.channel.send(embed)
+    }
+    
+});
+
+client.on('message', msg => {
+    if (msg.content === prefix+'resume') {
+      plmusic.resume();
+      const embed = new MessageEmbed()
+      .setTitle('Fortgesetzt')
+      .setColor(0x03fc67)
+      .setDescription('Das Lied wird fortgesetzt')
+      msg.channel.send(embed)
+    }
+    
+});
+
+client.login('Discord Token');
