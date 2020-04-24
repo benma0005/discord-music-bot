@@ -7,11 +7,13 @@
     "discord.js": "^12.2.0",
     "ffmpeg-static": "^4.1.1",
     "opusscript": "^0.0.7",
+    "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^2.1.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node main.js debug"
+    "test": "node main.js debug",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
