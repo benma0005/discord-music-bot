@@ -23,7 +23,7 @@ client.on('message', async message => {
                         const embed = new MessageEmbed()
                         .setTitle('Zuur auswahl stehend')
                         .setColor(0x03fc67)
-                        .setDescription(`**1**: ${results[0].title} \n **2**: ${results[1].title} \n **3**: ${results[2].title} \n **4**: ${results[3].title} \n **5**: ${results[4].title} \n **6**: ${results[5].title} \n **7**: ${results[6].title} \n **8**: ${results[7].title}`)
+                        .setDescription(`**1**: ${results[0].title} \n **2**: ${results[1].title} \n **3**: ${results[2].title} \n **4**: ${results[3].title} \n **5**: ${results[4].title} \n **6**: ${results[5].title} \n **7**: ${results[6].title} \n **8**: ${results[7].title} \n \n Sende eine Nachricht mit der entsprechenden Nummer`)
                         message.channel.send(embed)
                         message.channel.awaitMessages(msg => {
                             if (msg.content === "1") {
