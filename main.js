@@ -3,7 +3,7 @@ const { Client, MessageEmbed } = require('discord.js');
 const client = new Discord.Client();
 const ytdl = require('ytdl-core')
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('YT Token');
+const youtube = new YouTube('YouTube API Token');
 const prefix = '.'
 
 let plmusic;
